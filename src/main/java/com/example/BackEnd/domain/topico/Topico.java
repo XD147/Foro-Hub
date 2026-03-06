@@ -2,6 +2,7 @@ package com.example.BackEnd.domain.topico;
 
 import com.example.BackEnd.domain.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,6 +37,15 @@ public class Topico {
     @Column(name = "status_topico")
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    public Topico(Usuario usuario, String curso, String titulo, String mensaje, LocalDateTime fecha, Status status) {
+        this.usuario = usuario;
+        this.curso = curso;
+        this.titulo = titulo;
+        this.mensaje = mensaje;
+        this.fecha = fecha;
+        this.status = status;
+    }
 
     public void actualizaStatus(Status statusUpdate){
         this.status = statusUpdate;
