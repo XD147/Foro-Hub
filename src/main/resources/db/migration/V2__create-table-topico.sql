@@ -9,7 +9,7 @@ create table topicos(
     fecha datetime not null,
     status varchar(100) not null,
 
-    primary key(id)
+    primary key(id),
 
     constraint fk_topicos_usuario_id foreign key(usuario_id) references usuarios(id)
 );
