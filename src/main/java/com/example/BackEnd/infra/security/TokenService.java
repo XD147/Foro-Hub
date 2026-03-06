@@ -8,9 +8,11 @@ import com.example.BackEnd.domain.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+
 
 @Service
 public class TokenService {
@@ -22,7 +24,7 @@ public class TokenService {
         try {
             var algorithmo = Algorithm.HMAC256(secret);
             return JWT.create()
-                    .withIssuer("API voll.med")
+                    .withIssuer("API BackEnd")
                     .withSubject(usuario.getLogin())
                     .withExpiresAt(fechaExpiracion())
                     .sign(algorithmo);
@@ -40,7 +42,7 @@ public class TokenService {
         try {
             var algorithmo = Algorithm.HMAC256(secret);
             return JWT.require(algorithmo)
-                    .withIssuer("API voll.med")
+                    .withIssuer("API BackEnd")
                     .build()
                     .verify(tokenJWT)
                     .getSubject();
