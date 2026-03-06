@@ -1,4 +1,4 @@
-package com.example.BackEnd.infra;
+package com.example.BackEnd.infra.security;
 
 import com.example.BackEnd.domain.usuario.UsuarioRepository;
 import jakarta.servlet.FilterChain;
