@@ -22,10 +22,16 @@ public class TopicoController {
     private ManipulaTopico manipulaTopico;
 
     @GetMapping
-    public ResponseEntity<Page<ListaTopicos>> listar(@PageableDefault(page = 0, size = 10, sort = { "curso" }) Pageable paginacion) {
+    public ResponseEntity<Page<ListaTopicos>> listar(@PageableDefault(page = 0, size = 10, sort = { "fecha" }) Pageable paginacion) {
         var page = repository.findAll(paginacion).map(ListaTopicos::new);
 
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalle(@PathVariable Long id){
+        var resultado = manipulaTopico.detalleTopico(id);
+        return ResponseEntity.ok(resultado);
     }
 
     @PostMapping

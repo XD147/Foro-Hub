@@ -3,18 +3,19 @@ package com.example.BackEnd.domain.topico;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
 public record RegistroTopico(
-        @NotNull
+        @NotBlank
         Long usuario_id,
-        @NotNull
+        @NotBlank
         String curso,
-        @NotNull
+        @NotBlank
         String titulo,
-        @NotNull
+        @NotBlank
         String mensaje
 ) {
 }
