@@ -55,5 +55,17 @@ public class TopicoController {
         return ResponseEntity.ok().body("Registro actualizado!");
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity eliminar(@PathVariable Long id){
+        var resultado = repository.findById(id);
+        if (!resultado.isPresent()){
+            throw new ValidacionException("Registro no existe!");
+        }
+        repository.deleteById(id);
+
+        return ResponseEntity.ok().body("Registro eliminado existosamente!");
+    }
+
 
 }
