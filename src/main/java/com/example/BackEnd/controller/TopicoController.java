@@ -1,5 +1,6 @@
 package com.example.BackEnd.controller;
 
+import com.example.BackEnd.domain.ValidacionException;
 import com.example.BackEnd.domain.topico.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,19 @@ public class TopicoController {
         var resultado = manipulaTopico.registrarTopico(registroTopico);
         return ResponseEntity.ok(resultado);
     }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity actualizar(@PathVariable Long id, @RequestBody @Valid ActualizaTopico datos){
+        var val = repository.findById(id);
+        if (!val.isPresent()){
+            throw new ValidacionException("Registro no encontrado o no existe!");
+        }
+
+        val.get().actualizaTopico(datos);
+
+        return ResponseEntity.ok().body("Registro actualizado!");
+    }
+
 
 }

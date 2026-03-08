@@ -4,6 +4,7 @@ import com.example.BackEnd.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class Topico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Campo requerido!")
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
@@ -37,10 +38,9 @@ public class Topico {
     @NotBlank(message = "Campo requerido!")
     private String mensaje;
 
-    @NotBlank(message = "Campo requerido!")
     private LocalDateTime fecha;
 
-    @NotBlank(message = "Campo requerido!")
+    @NotNull
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -54,7 +54,23 @@ public class Topico {
         this.status = Status.ABIERTO;
     }
 
-    public void actualizaStatus(Status statusUpdate){
-        this.status = statusUpdate;
+    public void actualizaTopico(ActualizaTopico datos){
+        if (datos.curso() != null){
+            this.curso = datos.curso();
+        }
+
+        if (datos.titulo() != null){
+            this.titulo = datos.titulo();
+        }
+
+        if (datos.mensaje() != null){
+            this.mensaje = datos.mensaje();
+        }
+
+        if (datos.status() != null){
+            this.status = datos.status();
+        }
+
+        this.fecha = LocalDateTime.now();
     }
 }
